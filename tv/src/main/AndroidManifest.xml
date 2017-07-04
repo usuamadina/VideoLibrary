@@ -41,6 +41,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <service android:name=".UpdateRecommendationsService" android:enabled="true" />
     </application>
 
 </manifest>
