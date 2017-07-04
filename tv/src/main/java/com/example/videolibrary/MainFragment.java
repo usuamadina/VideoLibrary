@@ -1,16 +1,23 @@
 package com.example.videolibrary;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.HeaderItem;
+import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
+import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.Presenter;
+import android.support.v17.leanback.widget.Row;
+import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,6 +40,7 @@ public class MainFragment extends BrowseFragment {
         readData();
         startUserInterface();
         loadLists();
+        setupEventListeners();
     }
 
     private void readData() {
@@ -118,7 +126,25 @@ public class MainFragment extends BrowseFragment {
         }
     }
 
+    private void setupEventListeners() {
+        setOnItemViewClickedListener(new ItemViewClickedListener());
+    }
 
+    private final class ItemViewClickedListener implements OnItemViewClickedListener {
+
+        @Override
+        public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item, RowPresenter.ViewHolder rowViewHolder, Row row) {
+            if (item instanceof Movie) {
+                Movie movie = (Movie) item;
+                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                intent.putExtra(DetailsActivity.MOVIE, movie);
+                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ((ImageCardView) itemViewHolder.view).getMainImageView(), DetailsActivity.SHARED_ELEMENT_NAME).toBundle();
+                getActivity().startActivity(intent, bundle);
+            } else if (item instanceof String) {
+                Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
 
 
