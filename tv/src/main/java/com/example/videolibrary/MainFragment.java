@@ -15,6 +15,7 @@ import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +59,7 @@ public class MainFragment extends BrowseFragment {
         setHeadersTransitionOnBackEnabled(true);
         setBrandColor(getResources()
                 .getColor(R.color.fastlane_background));
+        setSearchAffordanceColor(getResources().getColor(R.color.search_opaque));
     }
 
     private void loadLists() {
@@ -128,6 +130,13 @@ public class MainFragment extends BrowseFragment {
 
     private void setupEventListeners() {
         setOnItemViewClickedListener(new ItemViewClickedListener());
+        setOnSearchClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private final class ItemViewClickedListener implements OnItemViewClickedListener {

@@ -31,7 +31,9 @@
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity">
+        <activity
+            android:name=".DetailsActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -40,6 +42,8 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".PlaybackOverlayActivity" />
+        <activity android:name=".SearchActivity"/>
+
         <receiver
             android:name=".BootupActivity"
             android:enabled="true"

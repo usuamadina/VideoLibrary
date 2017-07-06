@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 public class VideoDatabase {
     public static final String KEY_NAME = SearchManager.SUGGEST_COLUMN_TEXT_1;
+    public static final String KEY_DESCRIPTION = SearchManager.SUGGEST_COLUMN_TEXT_2;
     public static final String KEY_DATA_TYPE = SearchManager.SUGGEST_COLUMN_CONTENT_TYPE;
     public static final String KEY_PRODUCTION_YEAR = SearchManager.SUGGEST_COLUMN_PRODUCTION_YEAR;
     public static final String KEY_ICON = SearchManager.SUGGEST_COLUMN_RESULT_CARD_IMAGE;
